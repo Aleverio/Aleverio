@@ -130,15 +130,17 @@ $ cargo build --release --features motivation
 
 <!-- Tabel ini di-generate otomatis dari GitHub API oleh Actions — repo asli, bukan pajangan -->
 <!-- REPOS:START -->
-| Project | About | Stack | ⭐ | Updated |
-| ------- | ----- | ----- | -- | ------- |
-| [**ICode-Editor**](https://github.com/Aleverio/ICode-Editor) | This is my project, I don't know why I'm lazy to continue it. If anyo… | `TypeScript` | 0 | 2026-11-10 |
-| [**nova-studio**](https://github.com/Aleverio/nova-studio) | — | `TypeScript` | 0 | 2026-10-29 |
-| [**Porject-CodeBase**](https://github.com/Aleverio/Porject-CodeBase) | — | `—` | 0 | 2026-10-12 |
-| [**Winc**](https://github.com/Aleverio/Winc) 🍴 | Winc is built with Rust and its own rendering engine: it starts in 0.… | `Rust` | 2 | 2026-11-17 |
-| [**BenBot**](https://github.com/Aleverio/BenBot) 🍴 | A fork that modifies the design export component to generate code for… | `—` | 0 | 2026-11-20 |
+<div align="center">
 
-<sub>📡 generated from the GitHub API · last sync 2026-11-20 10:05 UTC · 🍴 = fork</sub>
+<a href="https://github.com/Aleverio/nova-studio"><img src="./assets/repo-nova-studio.svg" width="400" alt="nova-studio" /></a> <a href="https://github.com/Aleverio/Porject-CodeBase"><img src="./assets/repo-Porject-CodeBase.svg" width="400" alt="Porject-CodeBase" /></a>
+
+<a href="https://github.com/Aleverio/ICode-Editor"><img src="./assets/repo-ICode-Editor.svg" width="400" alt="ICode-Editor" /></a> <a href="https://github.com/Aleverio/Winc"><img src="./assets/repo-Winc.svg" width="400" alt="Winc" /></a>
+
+<a href="https://github.com/Aleverio/BenBot"><img src="./assets/repo-BenBot.svg" width="400" alt="BenBot" /></a>
+
+<sub>📡 every public repo, straight from the GitHub API · last sync 2026-11-20 10:14 UTC</sub>
+
+</div>
 <!-- REPOS:END -->
 
 <!-- ═══════════════════════════════════════════════════════════

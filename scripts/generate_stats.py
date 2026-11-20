@@ -4,8 +4,10 @@
 Fetches real data from the GitHub API and renders themed SVG cards.
 Run locally or via GitHub Actions (every 6h). No third-party services.
 """
+import glob
 import json
 import os
+import textwrap
 import urllib.request
 from datetime import datetime, timezone
 
@@ -146,25 +148,96 @@ def langs_card(repos):
     )
 
 
-def repos_table(repos):
+ICON_REPO = "M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"
+ICON_STAR = "M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
+ICON_FORK = "M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"
+
+
+def octicon(path, x, y, fill, scale=0.85):
+    return f'<path transform="translate({x},{y}) scale({scale})" fill="{fill}" d="{path}"/>'
+
+
+def ago(iso):
+    then = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    days = (datetime.now(timezone.utc) - then).days
+    if days <= 0:
+        return "today"
+    if days == 1:
+        return "yesterday"
+    if days < 30:
+        return f"{days}d ago"
+    if days < 365:
+        return f"{days // 30}mo ago"
+    return f"{days // 365}y ago"
+
+
+def repo_card(r, delay):
+    name = r["name"]
+    desc = r["description"] or "No description yet — cooking something good…"
+    wrapped = textwrap.wrap(desc, width=60)[:2]
+    if len(textwrap.wrap(desc, width=60)) > 2:
+        wrapped[1] = wrapped[1][:57].rstrip() + "…"
+    lang = r["language"]
+    lcolor = LANG_COLORS.get(lang, "#7D8590")
+    body = (
+        f'<g class="fade" style="animation-delay:{delay}ms">'
+        '<rect x="0.5" y="0.5" width="419" height="149" rx="10" fill="#0D1117" stroke="#30363D"/>'
+        '<rect x="1" y="12" width="3" height="126" rx="1.5" fill="#F74C00" opacity="0.9"/>'
+        + octicon(ICON_REPO, 22, 19, "#F74C00")
+        + f'<text x="44" y="32" class="rname">{esc(name)}</text>'
+    )
+    if r["fork"]:
+        body += (
+            '<rect x="352" y="16" width="52" height="20" rx="10" fill="#21262D" stroke="#30363D"/>'
+            + octicon(ICON_FORK, 360, 20, "#FFB454", 0.7)
+            + '<text x="376" y="30" class="forkpill">fork</text>'
+        )
+    for i, line in enumerate(wrapped):
+        body += f'<text x="22" y="{62 + i * 18}" class="rdesc">{esc(line)}</text>'
+    body += '<line x1="22" y1="106" x2="398" y2="106" stroke="#21262D"/>'
+    x = 22
+    if lang:
+        body += f'<circle cx="{x + 5}" cy="125" r="5" fill="{lcolor}"/><text x="{x + 15}" y="129" class="rmeta">{esc(lang)}</text>'
+        x += 15 + 7 * len(lang) + 22
+    body += octicon(ICON_STAR, x, 118, "#FFB454", 0.8) + f'<text x="{x + 17}" y="129" class="rmeta">{r["stargazers_count"]}</text>'
+    x += 17 + 8 * len(str(r["stargazers_count"])) + 20
+    body += octicon(ICON_FORK, x, 118, "#7D8590", 0.8) + f'<text x="{x + 17}" y="129" class="rmeta">{r["forks_count"]}</text>'
+    body += f'<text x="398" y="129" text-anchor="end" class="rtime">updated {ago(r["pushed_at"] or r["updated_at"])}</text>'
+    body += "</g>"
+    return (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="420" height="150" viewBox="0 0 420 150" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
+        "<style>"
+        ".rname{font-size:15px;font-weight:700;fill:#E6EDF3}"
+        ".rdesc{font-size:12px;fill:#7D8590}"
+        ".rmeta{font-size:12px;fill:#E6EDF3;font-family:'JetBrains Mono',Consolas,monospace}"
+        ".rtime{font-size:11px;fill:#7D8590}"
+        ".forkpill{font-size:11px;font-weight:600;fill:#FFB454}"
+        ".fade{animation:fade .7s ease both}"
+        "@keyframes fade{from{opacity:0}to{opacity:1}}"
+        "</style>" + body + "</svg>"
+    )
+
+
+def repos_section(repos):
     rows = [r for r in repos if r["name"] != USER]
-    rows.sort(key=lambda r: r["updated_at"], reverse=True)
+    rows.sort(key=lambda r: r["pushed_at"] or r["updated_at"], reverse=True)
     rows.sort(key=lambda r: (r["fork"], -r["stargazers_count"]))
-    lines = [
-        "| Project | About | Stack | ⭐ | Updated |",
-        "| ------- | ----- | ----- | -- | ------- |",
-    ]
-    for r in rows:
-        desc = (r["description"] or "—").replace("|", "\\|")
-        if len(desc) > 72:
-            desc = desc[:69].rstrip() + "…"
-        fork = " 🍴" if r["fork"] else ""
-        lang = r["language"] or "—"
-        upd = r["updated_at"][:10]
-        lines.append(f"| [**{r['name']}**]({r['html_url']}){fork} | {desc} | `{lang}` | {r['stargazers_count']} | {upd} |")
+    for old in glob.glob(os.path.join(OUT, "repo-*.svg")):
+        os.remove(old)
+    cards = []
+    for i, r in enumerate(rows):
+        fname = f"repo-{r['name']}.svg"
+        with open(os.path.join(OUT, fname), "w", encoding="utf-8") as f:
+            f.write(repo_card(r, i * 100))
+        cards.append(f'<a href="{r["html_url"]}"><img src="./assets/{fname}" width="400" alt="{esc(r["name"])}" /></a>')
+    lines = ['<div align="center">', ""]
+    for i in range(0, len(cards), 2):
+        lines.append(" ".join(cards[i:i + 2]))
+        lines.append("")
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    lines.append(f"<sub>📡 every public repo, straight from the GitHub API · last sync {stamp}</sub>")
     lines.append("")
-    lines.append(f"<sub>📡 generated from the GitHub API · last sync {stamp} · 🍴 = fork</sub>")
+    lines.append("</div>")
     return "\n".join(lines)
 
 
@@ -192,7 +265,7 @@ def main():
         with open(path, "w", encoding="utf-8") as f:
             f.write(svg)
         print("wrote", os.path.normpath(path))
-    sync_readme(repos_table(repos))
+    sync_readme(repos_section(repos))
 
 
 if __name__ == "__main__":

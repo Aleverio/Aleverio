@@ -1,11 +1,11 @@
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!--              ALEVERIO · PROFILE README · v2 🦀              -->
+<!--              ALEVERIO · PROFILE README · v3 🦀              -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
 <div align="center">
 
-<!-- Header -->
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=210&color=0:0D1117,45:B7410E,100:F74C00&text=Alkeyy&fontColor=E6EDF3&fontSize=66&fontAlignY=38&desc=%F0%9F%A6%80%20Rustacean%20%C2%B7%20Tool%20Builder%20%C2%B7%20Systems%20Thinker&descSize=17&descAlignY=62&animation=fadeIn" />
+<!-- Custom banner (asset ikut ke-commit di repo) -->
+<img width="100%" src="./assets/header.svg" alt="Alkeyy — Rustacean · Tool Builder · Systems Thinker" />
 
 <!-- Typing -->
 <a href="https://github.com/Aleverio">
@@ -49,6 +49,17 @@ $ cargo run --release --bin alkeyy
 
 ---
 
+## <img src="https://api.iconify.design/lucide/list-checks.svg?color=%23F74C00" width="22" /> Mission Log
+
+- [x] 🦀 Adopt Rust as the main weapon
+- [x] 🛠️ Build the first ICode-Editor prototype
+- [ ] 🎨 Ship nova-studio beta
+- [ ] 🧠 Master wgpu & rendering pipelines
+- [ ] 🌍 Contribute to open-source Rust ecosystem
+- [ ] 🚀 Release a tool people use every day
+
+---
+
 ## <img src="https://api.iconify.design/lucide/swords.svg?color=%23F74C00" width="22" /> Arsenal
 
 <div align="center">
@@ -84,8 +95,6 @@ $ cargo run --release --bin alkeyy
 
 <br/>
 
-<br/>
-
 <img src="https://img.shields.io/badge/%F0%9F%A6%80-Rustacean-F74C00?style=for-the-badge&labelColor=0D1117" />
 <img src="https://img.shields.io/badge/%E2%9A%A1-Performance%20Nerd-FFB454?style=for-the-badge&labelColor=0D1117" />
 <img src="https://img.shields.io/badge/%F0%9F%9B%A0%EF%B8%8F-Tool%20Maker-B7410E?style=for-the-badge&labelColor=0D1117" />
@@ -109,12 +118,17 @@ $ cargo run --release --bin alkeyy
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-🐍 BONUS: Snake animation eats your contribution graph!
-1. Copy snake.yml (next to this file) into your profile repo at
-   .github/workflows/snake.yml
-2. Run the workflow once (Actions tab → Run workflow)
-3. Uncomment the block below and commit. Done!
+🎮 BONUS: Pacman & Snake eat your contribution graph!
+1. Workflow sudah ada di .github/workflows/snake.yml
+2. Buka tab Actions → "Generate Snake Animation" → Run workflow
+3. Uncomment blok di bawah ini, commit. Done!
 ════════════════════════════════════════════════════════════
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Aleverio/Aleverio/output/pacman-contribution-graph-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Aleverio/Aleverio/output/pacman-contribution-graph.svg" />
+  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/Aleverio/Aleverio/output/pacman-contribution-graph.svg" />
+</picture>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Aleverio/Aleverio/output/github-contribution-grid-snake-dark.svg" />
@@ -133,14 +147,11 @@ $ cargo run --release --bin alkeyy
 
 <br/><br/>
 
-```rust
-fn main() {
-    loop {
-        learn();
-        build();
-        ship();
-    }
-}
+```console
+$ exit
+logout
+Connection to github.com closed.
+...see you in the next commit 🦀
 ```
 
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=120&section=footer&color=0:0D1117,45:B7410E,100:F74C00" />

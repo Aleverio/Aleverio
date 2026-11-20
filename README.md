@@ -50,14 +50,31 @@ $ cargo run --release --bin alkeyy
 
 ---
 
-## <img src="https://api.iconify.design/lucide/list-checks.svg?color=%23F74C00" width="22" /> Mission Log
+## <img src="https://api.iconify.design/lucide/coffee.svg?color=%23F74C00" width="22" /> Daily Fuel
 
-- [x] 🦀 Adopt Rust as the main weapon
-- [x] 🛠️ Build the first ICode-Editor prototype
-- [ ] 🎨 Ship nova-studio beta
-- [ ] 🧠 Master wgpu & rendering pipelines
-- [ ] 🌍 Contribute to open-source Rust ecosystem
-- [ ] 🚀 Release a tool people use every day
+<div align="center">
+
+<!-- Quote baru setiap halaman di-refresh — beneran live -->
+<img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=dark" />
+
+</div>
+
+<details>
+<summary>🥚 <b>secret stash — click if you dare</b></summary>
+
+<br/>
+
+```console
+$ cargo build --release --features motivation
+   Compiling motivation v1.0.0
+    Finished `release` profile [optimized] in 0.00s
+     Running `target/release/motivation`
+
+> "The best way to predict the future is to compile it." 🦀
+> hint: there are zero unsafe blocks in this profile. and in my dreams.
+```
+
+</details>
 
 ---
 
@@ -109,18 +126,20 @@ $ cargo run --release --bin alkeyy
 
 ---
 
-## <img src="https://api.iconify.design/lucide/rocket.svg?color=%23F74C00" width="22" /> Featured Projects
+## <img src="https://api.iconify.design/lucide/folder-git-2.svg?color=%23F74C00" width="22" /> Open Source
 
-<div align="center">
+<!-- Tabel ini di-generate otomatis dari GitHub API oleh Actions — repo asli, bukan pajangan -->
+<!-- REPOS:START -->
+| Project | About | Stack | ⭐ | Updated |
+| ------- | ----- | ----- | -- | ------- |
+| [**ICode-Editor**](https://github.com/Aleverio/ICode-Editor) | This is my project, I don't know why I'm lazy to continue it. If anyo… | `TypeScript` | 0 | 2026-11-10 |
+| [**nova-studio**](https://github.com/Aleverio/nova-studio) | — | `TypeScript` | 0 | 2026-10-29 |
+| [**Porject-CodeBase**](https://github.com/Aleverio/Porject-CodeBase) | — | `—` | 0 | 2026-10-12 |
+| [**Winc**](https://github.com/Aleverio/Winc) 🍴 | Winc is built with Rust and its own rendering engine: it starts in 0.… | `Rust` | 2 | 2026-11-17 |
+| [**BenBot**](https://github.com/Aleverio/BenBot) 🍴 | A fork that modifies the design export component to generate code for… | `—` | 0 | 2026-11-20 |
 
-<a href="https://github.com/Aleverio/ICode-Editor">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Aleverio&repo=ICode-Editor&hide_border=true&bg_color=0D1117&title_color=F74C00&icon_color=FFB454&text_color=E6EDF3" />
-</a>
-<a href="https://github.com/Aleverio/nova-studio">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Aleverio&repo=nova-studio&hide_border=true&bg_color=0D1117&title_color=F74C00&icon_color=FFB454&text_color=E6EDF3" />
-</a>
-
-</div>
+<sub>📡 generated from the GitHub API · last sync 2026-11-20 10:05 UTC · 🍴 = fork</sub>
+<!-- REPOS:END -->
 
 <!-- ═══════════════════════════════════════════════════════════
 🎮 BONUS: Pacman & Snake eat your contribution graph!

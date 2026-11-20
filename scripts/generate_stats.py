@@ -146,6 +146,42 @@ def langs_card(repos):
     )
 
 
+def repos_table(repos):
+    rows = [r for r in repos if r["name"] != USER]
+    rows.sort(key=lambda r: r["updated_at"], reverse=True)
+    rows.sort(key=lambda r: (r["fork"], -r["stargazers_count"]))
+    lines = [
+        "| Project | About | Stack | ⭐ | Updated |",
+        "| ------- | ----- | ----- | -- | ------- |",
+    ]
+    for r in rows:
+        desc = (r["description"] or "—").replace("|", "\\|")
+        if len(desc) > 72:
+            desc = desc[:69].rstrip() + "…"
+        fork = " 🍴" if r["fork"] else ""
+        lang = r["language"] or "—"
+        upd = r["updated_at"][:10]
+        lines.append(f"| [**{r['name']}**]({r['html_url']}){fork} | {desc} | `{lang}` | {r['stargazers_count']} | {upd} |")
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    lines.append("")
+    lines.append(f"<sub>📡 generated from the GitHub API · last sync {stamp} · 🍴 = fork</sub>")
+    return "\n".join(lines)
+
+
+def sync_readme(table):
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "README.md")
+    with open(path, encoding="utf-8") as f:
+        md = f.read()
+    start, end = "<!-- REPOS:START -->", "<!-- REPOS:END -->"
+    if start in md and end in md:
+        pre, rest = md.split(start, 1)
+        _, post = rest.split(end, 1)
+        md = pre + start + "\n" + table + "\n" + end + post
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(md)
+        print("synced README repo table")
+
+
 def main():
     user = get(f"/users/{USER}")
     repos = get(f"/users/{USER}/repos?per_page=100&type=owner")
@@ -156,6 +192,7 @@ def main():
         with open(path, "w", encoding="utf-8") as f:
             f.write(svg)
         print("wrote", os.path.normpath(path))
+    sync_readme(repos_table(repos))
 
 
 if __name__ == "__main__":

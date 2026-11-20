@@ -126,6 +126,20 @@ $ cargo build --release --features motivation
 
 ---
 
+## <img src="https://api.iconify.design/lucide/git-commit.svg?color=%23F74C00" width="22" /> Contribution Pulse
+
+<div align="center">
+
+<!-- Heatmap kontribusi + aktivitas commit — di-generate dari data GitHub asli -->
+<img src="./assets/heatmap.svg" width="100%" alt="Contribution heatmap" />
+<img src="./assets/activity.svg" width="100%" alt="Contribution activity" />
+
+<sub>📡 full-year calendar via GitHub GraphQL in Actions · commit activity from live public events</sub>
+
+</div>
+
+---
+
 ## <img src="https://api.iconify.design/lucide/folder-git-2.svg?color=%23F74C00" width="22" /> Open Source
 
 <!-- Tabel ini di-generate otomatis dari GitHub API oleh Actions — repo asli, bukan pajangan -->
@@ -138,7 +152,7 @@ $ cargo build --release --features motivation
 
 <a href="https://github.com/Aleverio/BenBot"><img src="./assets/repo-BenBot.svg" width="400" alt="BenBot" /></a>
 
-<sub>📡 every public repo, straight from the GitHub API · last sync 2026-11-20 10:27 UTC</sub>
+<sub>📡 every public repo, straight from the GitHub API · last sync 2026-11-20 11:22 UTC</sub>
 
 </div>
 <!-- REPOS:END -->

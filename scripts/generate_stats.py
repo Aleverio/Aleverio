@@ -9,7 +9,7 @@ import json
 import os
 import textwrap
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 USER = "Aleverio"
 API = "https://api.github.com"
@@ -34,6 +34,264 @@ def get(path):
         req.add_header("Authorization", "Bearer " + token)
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
+
+
+def graphql(query, token):
+    req = urllib.request.Request(
+        "https://api.github.com/graphql",
+        data=json.dumps({"query": query}).encode(),
+        headers={"Authorization": "Bearer " + token,
+                 "User-Agent": "alkeyy-profile-stats",
+                 "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)
+
+
+def public_events():
+    events = []
+    for page in (1, 2, 3):
+        try:
+            batch = get(f"/users/{USER}/events/public?per_page=100&page={page}")
+        except Exception:
+            break
+        if not batch:
+            break
+        events.extend(batch)
+    return events
+
+
+def event_stats(events):
+    days, by_repo = {}, {}
+    commits = prs = creates = 0
+    push_repos, push_days = set(), {}
+    for e in events:
+        day = e["created_at"][:10]
+        t = e["type"]
+        n = 0
+        if t == "PushEvent":
+            repo = e["repo"]["name"]
+            push_repos.add(repo)
+            n = e["payload"].get("size") or len(e["payload"].get("commits", [])) or 1
+            push_days.setdefault(repo, {})
+            push_days[repo][day] = push_days[repo].get(day, 0) + n
+        elif t == "PullRequestEvent" and e["payload"].get("action") == "opened":
+            prs += 1
+            n = 1
+        elif t == "CreateEvent":
+            creates += 1
+            n = 1
+        elif t in ("IssuesEvent", "IssueCommentEvent", "PullRequestReviewEvent"):
+            n = 1
+        if n:
+            days[day] = days.get(day, 0) + n
+    since = (datetime.now(timezone.utc) - timedelta(days=90)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    for repo in list(push_repos)[:6]:
+        try:
+            cl = get(f"/repos/{repo}/commits?author={USER}&since={since}&per_page=100")
+        except Exception:
+            cl = None
+        if cl is None:
+            n = sum(push_days[repo].values())
+            by_repo[repo] = n
+            commits += n
+            continue
+        by_repo[repo] = len(cl)
+        commits += len(cl)
+        for d, n in push_days[repo].items():
+            days[d] = days.get(d, 0) - n
+        for c in cl:
+            d = (c["commit"].get("author") or {}).get("date", "")[:10]
+            if d:
+                days[d] = days.get(d, 0) + 1
+    days = {d: n for d, n in days.items() if n > 0}
+    return days, by_repo, commits, prs, creates
+
+
+HEAT = ["#161B22", "#4A2113", "#7A3416", "#B7410E", "#F74C00", "#FFB454"]
+
+
+def graphql_activity(token):
+    now = datetime.now(timezone.utc)
+    frm = (now - timedelta(days=90)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    to = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+    q = ('{user(login:"%s"){contributionsCollection(from:"%s",to:"%s"){'
+         'totalCommitContributions pullRequestContributions{totalCount} '
+         'repositoryContributions{totalCount} '
+         'commitContributionsByRepository(maxRepositories:30){'
+         'repository{nameWithOwner isPrivate} contributions{totalCount}}}}}') % (USER, frm, to)
+    cc = graphql(q, token)["data"]["user"]["contributionsCollection"]
+    by_repo, public = {}, 0
+    for c in cc["commitContributionsByRepository"]:
+        n = c["contributions"]["totalCount"]
+        if c["repository"]["isPrivate"]:
+            continue  # never leak private repo names — aggregate only
+        by_repo[c["repository"]["nameWithOwner"]] = n
+        public += n
+    private = max(0, cc["totalCommitContributions"] - public)
+    return by_repo, public, cc["pullRequestContributions"]["totalCount"], cc["repositoryContributions"]["totalCount"], private
+
+
+def heat_level(n):
+    if n <= 0:
+        return 0
+    if n == 1:
+        return 1
+    if n <= 3:
+        return 2
+    if n <= 6:
+        return 3
+    if n <= 9:
+        return 4
+    return 5
+
+
+def heatmap_card(days_fallback, total_fallback):
+    token = os.environ.get("PROFILE_TOKEN") or os.environ.get("GITHUB_TOKEN")
+    weeks = None
+    total = None
+    if token:
+        try:
+            q = ('{user(login:"%s"){contributionsCollection{contributionCalendar'
+                 '{totalContributions weeks{contributionDays{date contributionCount}}}}}}') % USER
+            cal = graphql(q, token)["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+            weeks = [[(d["date"], d["contributionCount"]) for d in w["contributionDays"]] for w in cal["weeks"]]
+            total = cal["totalContributions"]
+        except Exception:
+            weeks = None
+    if weeks is None:
+        today = datetime.now(timezone.utc).date()
+        sunday = today - timedelta(days=(today.weekday() + 1) % 7)
+        start = sunday - timedelta(weeks=12)
+        weeks = []
+        for w in range(13):
+            week = []
+            for d in range(7):
+                date = start + timedelta(weeks=w, days=d)
+                week.append((date.isoformat(), days_fallback.get(date.isoformat(), 0) if date <= today else -1))
+            weeks.append(week)
+        total = total_fallback
+    nw = len(weeks)
+    cell, gap = 12, 3
+    gw = nw * (cell + gap) - gap
+    x0 = 34
+    y0 = 64
+    body = (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="214" viewBox="0 0 840 214" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
+        "<style>"
+        ".ht{font-size:15px;font-weight:700;fill:#F74C00}"
+        ".hm{font-size:10px;fill:#7D8590}"
+        ".hn{font-size:10px;fill:#7D8590}"
+        ".hb{font-size:22px;font-weight:700;fill:#FFB454;font-family:'JetBrains Mono',Consolas,monospace}"
+        ".live{font-size:10px;font-weight:700;fill:#3FB950;letter-spacing:1px}"
+        "</style>"
+        '<rect x="0.5" y="0.5" width="839" height="213" rx="10" fill="#0D1117" stroke="#30363D"/>'
+        '<rect x="1" y="1" width="838" height="3" rx="1.5" fill="#F74C00" opacity="0.85"/>'
+    )
+    label = (f"{total} contributions in the last year" if nw > 30
+             else f"{total} public contributions · last 90 days")
+    body += f'<text x="25" y="36" class="ht">{esc(label)}</text>'
+    body += ('<circle cx="772" cy="31" r="4" fill="#3FB950">'
+             '<animate attributeName="opacity" values="1;0.25;1" dur="2s" repeatCount="indefinite"/></circle>'
+             '<text x="782" y="35" class="live">LIVE</text>')
+    last_month = ""
+    for wi, week in enumerate(weeks):
+        x = x0 + wi * (cell + gap)
+        if week:
+            m = datetime.fromisoformat(week[0][0]).strftime("%b")
+            if m != last_month:
+                body += f'<text x="{x}" y="{y0 - 8}" class="hm">{m}</text>'
+                last_month = m
+        for di, (date, n) in enumerate(week):
+            if n < 0:
+                continue
+            y = y0 + di * (cell + gap)
+            body += (f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2.5" fill="{HEAT[heat_level(n)]}">'
+                     f'<title>{date}: {n}</title></rect>')
+    for di, lbl in ((1, "Mon"), (3, "Wed"), (5, "Fri")):
+        body += f'<text x="8" y="{y0 + di * (cell + gap) + 10}" class="hm">{lbl}</text>'
+    if nw <= 30:
+        # fallback mode: grid is narrow — fill the right side with a live stats panel
+        active = sum(1 for n in days_fallback.values() if n > 0)
+        best = max(days_fallback.items(), key=lambda kv: kv[1]) if days_fallback else None
+        streak, d = 0, datetime.now(timezone.utc).date()
+        if days_fallback.get(d.isoformat(), 0) <= 0:
+            d -= timedelta(days=1)
+        while days_fallback.get(d.isoformat(), 0) > 0:
+            streak += 1
+            d -= timedelta(days=1)
+        best_lbl = (datetime.fromisoformat(best[0]).strftime("%b %d") + f" · {best[1]}") if best else "—"
+        body += '<line x1="270" y1="60" x2="270" y2="178" stroke="#21262D"/>'
+        panels = [(310, 96, str(total), "public contributions"),
+                  (580, 96, str(active), "active days"),
+                  (310, 156, best_lbl, "best day"),
+                  (580, 156, str(streak), "day streak right now")]
+        for px, py, val, lbl in panels:
+            body += (f'<text x="{px}" y="{py}" class="hb">{esc(val)}</text>'
+                     f'<text x="{px}" y="{py + 18}" class="hn">{esc(lbl)}</text>')
+    lx = 840 - 25 - 6 * 15 - 60
+    body += f'<text x="{lx}" y="196" class="hn">Less</text>'
+    for i in range(6):
+        body += f'<rect x="{lx + 30 + i * 15}" y="187" width="11" height="11" rx="2.5" fill="{HEAT[i]}"/>'
+    body += f'<text x="{lx + 30 + 6 * 15 + 4}" y="196" class="hn">More</text>'
+    body += '<text x="25" y="196" class="hn">every square is a real contribution · refreshed by the live pipeline</text>'
+    body += "</svg>"
+    return body
+
+
+def activity_card(by_repo, commits, prs, creates, repos, private=0):
+    top = sorted(((k, v) for k, v in by_repo.items() if v > 0), key=lambda kv: -kv[1])[:3]
+    recent_repos = [r["name"] for r in repos
+                    if not r["fork"] and r["created_at"] >= (datetime.now(timezone.utc) - timedelta(days=90)).isoformat()]
+    creates = max(creates, len(recent_repos))
+    body = (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="210" viewBox="0 0 840 210" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
+        "<style>"
+        ".at{font-size:15px;font-weight:700;fill:#F74C00}"
+        ".as{font-size:13px;font-weight:600;fill:#E6EDF3}"
+        ".ar{font-size:12px;fill:#E6EDF3;font-family:'JetBrains Mono',Consolas,monospace}"
+        ".ac{font-size:11px;fill:#7D8590}"
+        ".ab{font-size:26px;font-weight:700;fill:#FFB454;font-family:'JetBrains Mono',Consolas,monospace}"
+        ".al{font-size:11px;fill:#7D8590}"
+        ".live{font-size:10px;font-weight:700;fill:#3FB950;letter-spacing:1px}"
+        ".fade{animation:fade .8s ease both}"
+        "@keyframes fade{from{opacity:0}to{opacity:1}}"
+        "</style>"
+        '<rect x="0.5" y="0.5" width="839" height="209" rx="10" fill="#0D1117" stroke="#30363D"/>'
+        '<rect x="1" y="1" width="838" height="3" rx="1.5" fill="#F74C00" opacity="0.85"/>'
+        '<text x="25" y="36" class="at">Contribution Activity</text>'
+        '<text x="200" y="36" class="ac">last 90 days · public events</text>'
+        '<circle cx="772" cy="31" r="4" fill="#3FB950">'
+        '<animate attributeName="opacity" values="1;0.25;1" dur="2s" repeatCount="indefinite"/></circle>'
+        '<text x="782" y="35" class="live">LIVE</text>'
+    )
+    nrepos = len(by_repo)
+    summary = f'Created {commits} commits in {nrepos} repositor{"y" if nrepos == 1 else "ies"}'
+    if private:
+        summary += f'  ·  +{private} in private repos (anonymized)'
+    body += f'<text x="25" y="68" class="as">{esc(summary)}</text>'
+    if top:
+        mx = max(top[0][1], 1)
+        for i, (repo, n) in enumerate(top):
+            y = 96 + i * 30
+            bw = max(6, int(240 * n / mx))
+            short = repo.split("/")[-1]
+            body += (
+                f'<g class="fade" style="animation-delay:{i * 120}ms">'
+                f'<text x="25" y="{y}" class="ar">{esc(short)}</text>'
+                f'<rect x="220" y="{y - 9}" width="{bw}" height="9" rx="4.5" fill="#F74C00"/>'
+                f'<rect x="220" y="{y - 9}" width="{bw}" height="9" rx="4.5" fill="#FFB454" opacity="0.25"/>'
+                f'<text x="{220 + bw + 10}" y="{y}" class="ac">{n} commit{"s" if n != 1 else ""}</text></g>'
+            )
+    else:
+        body += '<text x="25" y="100" class="ac">warming up — commits incoming…</text>'
+    body += '<line x1="560" y1="58" x2="560" y2="180" stroke="#21262D"/>'
+    body += (f'<text x="600" y="100" class="ab">{creates}</text>'
+             '<text x="600" y="118" class="al">repositories created</text>'
+             f'<text x="720" y="100" class="ab">{prs}</text>'
+             '<text x="720" y="118" class="al">pull requests opened</text>')
+    body += '<text x="25" y="192" class="ac">bars scale with your most active repositories · refreshed every 6h</text>'
+    body += "</svg>"
+    return body
 
 
 def esc(s):
@@ -309,9 +567,20 @@ def main():
     user = get(f"/users/{USER}")
     repos = get(f"/users/{USER}/repos?per_page=100&type=owner")
     os.makedirs(OUT, exist_ok=True)
+    events = public_events()
+    days, by_repo, commits, prs, creates = event_stats(events)
+    private = 0
+    token = os.environ.get("PROFILE_TOKEN") or os.environ.get("GITHUB_TOKEN")
+    if token:
+        try:
+            by_repo, commits, prs, creates, private = graphql_activity(token)
+        except Exception:
+            pass  # fall back to public events
     for name, svg in [("metrics-stats.svg", stats_card(user, repos)),
                       ("metrics-langs.svg", langs_card(repos)),
-                      ("quote.svg", quote_card())]:
+                      ("quote.svg", quote_card()),
+                      ("heatmap.svg", heatmap_card(days, sum(days.values()))),
+                      ("activity.svg", activity_card(by_repo, commits, prs, creates, repos, private))]:
         path = os.path.join(OUT, name)
         with open(path, "w", encoding="utf-8") as f:
             f.write(svg)

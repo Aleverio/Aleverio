@@ -24,6 +24,7 @@ jobs:
         run: python scripts/generate_stats.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
 
       - name: Commit refreshed cards
         run: |

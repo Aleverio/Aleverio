@@ -148,6 +148,56 @@ def langs_card(repos):
     )
 
 
+QUOTES = [
+    ("The impediment to action advances action. What stands in the way becomes the way.", "Marcus Aurelius"),
+    ("We suffer more often in imagination than in reality.", "Seneca"),
+    ("Fall seven times, stand up eight.", "Japanese Proverb"),
+    ("The best time to plant a tree was 20 years ago. The second best time is now.", "Chinese Proverb"),
+    ("It always seems impossible until it's done.", "Nelson Mandela"),
+    ("You do not rise to the level of your goals. You fall to the level of your systems.", "James Clear"),
+    ("A ship in harbor is safe, but that is not what ships are built for.", "John A. Shedd"),
+    ("He who has a why to live can bear almost any how.", "Friedrich Nietzsche"),
+    ("The cave you fear to enter holds the treasure you seek.", "Joseph Campbell"),
+    ("Knowing is not enough; we must apply. Willing is not enough; we must do.", "Bruce Lee"),
+    ("Everything you've ever wanted is on the other side of fear.", "George Addair"),
+    ("The man who moves a mountain begins by carrying away small stones.", "Confucius"),
+    ("Your future is created by what you do today, not tomorrow.", "Robert Kiyosaki"),
+    ("Hard choices, easy life. Easy choices, hard life.", "Jerzy Gregorek"),
+    ("Small daily improvements are the key to staggering long-term results.", "Robin Sharma"),
+    ("Discipline equals freedom.", "Jocko Willink"),
+]
+
+
+def quote_card():
+    day = datetime.now(timezone.utc).timetuple().tm_yday
+    text, author = QUOTES[day % len(QUOTES)]
+    lines = textwrap.wrap(text, width=72)[:3]
+    body = (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="170" viewBox="0 0 840 170" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
+        "<style>"
+        ".q{font-size:18px;font-style:italic;fill:#E6EDF3}"
+        ".a{font-size:14px;font-weight:700;fill:#FFB454}"
+        ".n{font-size:10px;fill:#7D8590}"
+        ".fade{animation:fade 1.2s ease both}"
+        "@keyframes fade{from{opacity:0}to{opacity:1}}"
+        "</style>"
+        '<rect x="0.5" y="0.5" width="839" height="169" rx="10" fill="#0D1117" stroke="#30363D"/>'
+        '<rect x="1" y="12" width="3" height="146" rx="1.5" fill="#F74C00" opacity="0.9"/>'
+        '<text x="30" y="88" font-size="72" font-weight="700" fill="#F74C00" opacity="0.85" font-family="Georgia,serif">&#8220;</text>'
+        '<g class="fade">'
+    )
+    y0 = 62 if len(lines) == 1 else (52 if len(lines) == 2 else 42)
+    for i, line in enumerate(lines):
+        body += f'<text x="95" y="{y0 + i * 26}" class="q">{esc(line)}</text>'
+    body += (
+        f'<text x="810" y="{y0 + len(lines) * 26 + 14}" text-anchor="end" class="a">— {esc(author)}</text>'
+        '</g>'
+        '<text x="95" y="152" class="n">daily fuel · a new quote every day, delivered by the live pipeline</text>'
+        "</svg>"
+    )
+    return body
+
+
 ICON_REPO = "M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"
 ICON_STAR = "M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
 ICON_FORK = "M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"
@@ -260,7 +310,8 @@ def main():
     repos = get(f"/users/{USER}/repos?per_page=100&type=owner")
     os.makedirs(OUT, exist_ok=True)
     for name, svg in [("metrics-stats.svg", stats_card(user, repos)),
-                      ("metrics-langs.svg", langs_card(repos))]:
+                      ("metrics-langs.svg", langs_card(repos)),
+                      ("quote.svg", quote_card())]:
         path = os.path.join(OUT, name)
         with open(path, "w", encoding="utf-8") as f:
             f.write(svg)

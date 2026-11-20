@@ -54,8 +54,8 @@ $ cargo run --release --bin alkeyy
 
 <div align="center">
 
-<!-- Quote baru setiap halaman di-refresh — beneran live -->
-<img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=dark" />
+<!-- Kata-kata pengubah hidup — berganti otomatis setiap hari via Actions -->
+<img src="./assets/quote.svg" width="100%" alt="Daily fuel — life-changing quote, rotates every day" />
 
 </div>
 
@@ -138,7 +138,7 @@ $ cargo build --release --features motivation
 
 <a href="https://github.com/Aleverio/BenBot"><img src="./assets/repo-BenBot.svg" width="400" alt="BenBot" /></a>
 
-<sub>📡 every public repo, straight from the GitHub API · last sync 2026-11-20 10:14 UTC</sub>
+<sub>📡 every public repo, straight from the GitHub API · last sync 2026-11-20 10:20 UTC</sub>
 
 </div>
 <!-- REPOS:END -->

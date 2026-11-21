@@ -146,13 +146,9 @@ $ cargo build --release --features motivation
 <!-- REPOS:START -->
 <div align="center">
 
-<a href="https://github.com/Aleverio/nova-studio"><img src="./assets/repo-nova-studio.svg" width="400" alt="nova-studio" /></a> <a href="https://github.com/Aleverio/Porject-CodeBase"><img src="./assets/repo-Porject-CodeBase.svg" width="400" alt="Porject-CodeBase" /></a>
+<a href="https://github.com/Aleverio/Brest"><img src="./assets/repo-Brest.svg" width="400" alt="Brest" /></a> <a href="https://github.com/Aleverio/Winc"><img src="./assets/repo-Winc.svg" width="400" alt="Winc" /></a>
 
-<a href="https://github.com/Aleverio/ICode-Editor"><img src="./assets/repo-ICode-Editor.svg" width="400" alt="ICode-Editor" /></a> <a href="https://github.com/Aleverio/Winc"><img src="./assets/repo-Winc.svg" width="400" alt="Winc" /></a>
-
-<a href="https://github.com/Aleverio/BenBot"><img src="./assets/repo-BenBot.svg" width="400" alt="BenBot" /></a>
-
-<sub>📡 every public repo, straight from the GitHub API · last sync 2026-11-21 03:06 UTC</sub>
+<sub>📡 every public repo, straight from the GitHub API · last sync 2026-11-21 10:54 UTC</sub>
 
 </div>
 <!-- REPOS:END -->

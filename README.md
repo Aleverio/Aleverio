@@ -148,7 +148,7 @@ $ cargo build --release --features motivation
 
 <a href="https://github.com/Aleverio/Brest"><img src="./assets/repo-Brest.svg" width="400" alt="Brest" /></a> <a href="https://github.com/Aleverio/Winc"><img src="./assets/repo-Winc.svg" width="400" alt="Winc" /></a>
 
-<sub>📡 every public repo, straight from the GitHub API · last sync 2026-11-21 17:52 UTC</sub>
+<sub>📡 every public repo, straight from the GitHub API · last sync 2026-11-21 22:39 UTC</sub>
 
 </div>
 <!-- REPOS:END -->

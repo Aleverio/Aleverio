@@ -1,124 +1,124 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="840" height="150" viewBox="0 0 840 150" font-family="'Segoe UI',Ubuntu,Sans-Serif"><style>.qtext{font-size:18px;font-style:italic;fill:#E6EDF3}
 .author{font-size:14px;font-weight:700;fill:#FFB454}
-.q0{opacity:0;animation:q0 36600s linear -20034s infinite}
+.q0{opacity:0;animation:q0 36600s linear -20105s infinite}
 @keyframes q0{0%{opacity:0}0.0000%{opacity:0}0.0040%{opacity:1}1.6353%{opacity:1}1.6393%{opacity:0}100%{opacity:0}}
-.q1{opacity:0;animation:q1 36600s linear -20034s infinite}
+.q1{opacity:0;animation:q1 36600s linear -20105s infinite}
 @keyframes q1{0%{opacity:0}1.6393%{opacity:0}1.6433%{opacity:1}3.2747%{opacity:1}3.2787%{opacity:0}100%{opacity:0}}
-.q2{opacity:0;animation:q2 36600s linear -20034s infinite}
+.q2{opacity:0;animation:q2 36600s linear -20105s infinite}
 @keyframes q2{0%{opacity:0}3.2787%{opacity:0}3.2827%{opacity:1}4.9140%{opacity:1}4.9180%{opacity:0}100%{opacity:0}}
-.q3{opacity:0;animation:q3 36600s linear -20034s infinite}
+.q3{opacity:0;animation:q3 36600s linear -20105s infinite}
 @keyframes q3{0%{opacity:0}4.9180%{opacity:0}4.9220%{opacity:1}6.5534%{opacity:1}6.5574%{opacity:0}100%{opacity:0}}
-.q4{opacity:0;animation:q4 36600s linear -20034s infinite}
+.q4{opacity:0;animation:q4 36600s linear -20105s infinite}
 @keyframes q4{0%{opacity:0}6.5574%{opacity:0}6.5614%{opacity:1}8.1927%{opacity:1}8.1967%{opacity:0}100%{opacity:0}}
-.q5{opacity:0;animation:q5 36600s linear -20034s infinite}
+.q5{opacity:0;animation:q5 36600s linear -20105s infinite}
 @keyframes q5{0%{opacity:0}8.1967%{opacity:0}8.2007%{opacity:1}9.8321%{opacity:1}9.8361%{opacity:0}100%{opacity:0}}
-.q6{opacity:0;animation:q6 36600s linear -20034s infinite}
+.q6{opacity:0;animation:q6 36600s linear -20105s infinite}
 @keyframes q6{0%{opacity:0}9.8361%{opacity:0}9.8401%{opacity:1}11.4714%{opacity:1}11.4754%{opacity:0}100%{opacity:0}}
-.q7{opacity:0;animation:q7 36600s linear -20034s infinite}
+.q7{opacity:0;animation:q7 36600s linear -20105s infinite}
 @keyframes q7{0%{opacity:0}11.4754%{opacity:0}11.4794%{opacity:1}13.1108%{opacity:1}13.1148%{opacity:0}100%{opacity:0}}
-.q8{opacity:0;animation:q8 36600s linear -20034s infinite}
+.q8{opacity:0;animation:q8 36600s linear -20105s infinite}
 @keyframes q8{0%{opacity:0}13.1148%{opacity:0}13.1188%{opacity:1}14.7501%{opacity:1}14.7541%{opacity:0}100%{opacity:0}}
-.q9{opacity:0;animation:q9 36600s linear -20034s infinite}
+.q9{opacity:0;animation:q9 36600s linear -20105s infinite}
 @keyframes q9{0%{opacity:0}14.7541%{opacity:0}14.7581%{opacity:1}16.3894%{opacity:1}16.3934%{opacity:0}100%{opacity:0}}
-.q10{opacity:0;animation:q10 36600s linear -20034s infinite}
+.q10{opacity:0;animation:q10 36600s linear -20105s infinite}
 @keyframes q10{0%{opacity:0}16.3934%{opacity:0}16.3974%{opacity:1}18.0288%{opacity:1}18.0328%{opacity:0}100%{opacity:0}}
-.q11{opacity:0;animation:q11 36600s linear -20034s infinite}
+.q11{opacity:0;animation:q11 36600s linear -20105s infinite}
 @keyframes q11{0%{opacity:0}18.0328%{opacity:0}18.0368%{opacity:1}19.6681%{opacity:1}19.6721%{opacity:0}100%{opacity:0}}
-.q12{opacity:0;animation:q12 36600s linear -20034s infinite}
+.q12{opacity:0;animation:q12 36600s linear -20105s infinite}
 @keyframes q12{0%{opacity:0}19.6721%{opacity:0}19.6761%{opacity:1}21.3075%{opacity:1}21.3115%{opacity:0}100%{opacity:0}}
-.q13{opacity:0;animation:q13 36600s linear -20034s infinite}
+.q13{opacity:0;animation:q13 36600s linear -20105s infinite}
 @keyframes q13{0%{opacity:0}21.3115%{opacity:0}21.3155%{opacity:1}22.9468%{opacity:1}22.9508%{opacity:0}100%{opacity:0}}
-.q14{opacity:0;animation:q14 36600s linear -20034s infinite}
+.q14{opacity:0;animation:q14 36600s linear -20105s infinite}
 @keyframes q14{0%{opacity:0}22.9508%{opacity:0}22.9548%{opacity:1}24.5862%{opacity:1}24.5902%{opacity:0}100%{opacity:0}}
-.q15{opacity:0;animation:q15 36600s linear -20034s infinite}
+.q15{opacity:0;animation:q15 36600s linear -20105s infinite}
 @keyframes q15{0%{opacity:0}24.5902%{opacity:0}24.5942%{opacity:1}26.2255%{opacity:1}26.2295%{opacity:0}100%{opacity:0}}
-.q16{opacity:0;animation:q16 36600s linear -20034s infinite}
+.q16{opacity:0;animation:q16 36600s linear -20105s infinite}
 @keyframes q16{0%{opacity:0}26.2295%{opacity:0}26.2335%{opacity:1}27.8649%{opacity:1}27.8689%{opacity:0}100%{opacity:0}}
-.q17{opacity:0;animation:q17 36600s linear -20034s infinite}
+.q17{opacity:0;animation:q17 36600s linear -20105s infinite}
 @keyframes q17{0%{opacity:0}27.8689%{opacity:0}27.8729%{opacity:1}29.5042%{opacity:1}29.5082%{opacity:0}100%{opacity:0}}
-.q18{opacity:0;animation:q18 36600s linear -20034s infinite}
+.q18{opacity:0;animation:q18 36600s linear -20105s infinite}
 @keyframes q18{0%{opacity:0}29.5082%{opacity:0}29.5122%{opacity:1}31.1435%{opacity:1}31.1475%{opacity:0}100%{opacity:0}}
-.q19{opacity:0;animation:q19 36600s linear -20034s infinite}
+.q19{opacity:0;animation:q19 36600s linear -20105s infinite}
 @keyframes q19{0%{opacity:0}31.1475%{opacity:0}31.1515%{opacity:1}32.7829%{opacity:1}32.7869%{opacity:0}100%{opacity:0}}
-.q20{opacity:0;animation:q20 36600s linear -20034s infinite}
+.q20{opacity:0;animation:q20 36600s linear -20105s infinite}
 @keyframes q20{0%{opacity:0}32.7869%{opacity:0}32.7909%{opacity:1}34.4222%{opacity:1}34.4262%{opacity:0}100%{opacity:0}}
-.q21{opacity:0;animation:q21 36600s linear -20034s infinite}
+.q21{opacity:0;animation:q21 36600s linear -20105s infinite}
 @keyframes q21{0%{opacity:0}34.4262%{opacity:0}34.4302%{opacity:1}36.0616%{opacity:1}36.0656%{opacity:0}100%{opacity:0}}
-.q22{opacity:0;animation:q22 36600s linear -20034s infinite}
+.q22{opacity:0;animation:q22 36600s linear -20105s infinite}
 @keyframes q22{0%{opacity:0}36.0656%{opacity:0}36.0696%{opacity:1}37.7009%{opacity:1}37.7049%{opacity:0}100%{opacity:0}}
-.q23{opacity:0;animation:q23 36600s linear -20034s infinite}
+.q23{opacity:0;animation:q23 36600s linear -20105s infinite}
 @keyframes q23{0%{opacity:0}37.7049%{opacity:0}37.7089%{opacity:1}39.3403%{opacity:1}39.3443%{opacity:0}100%{opacity:0}}
-.q24{opacity:0;animation:q24 36600s linear -20034s infinite}
+.q24{opacity:0;animation:q24 36600s linear -20105s infinite}
 @keyframes q24{0%{opacity:0}39.3443%{opacity:0}39.3483%{opacity:1}40.9796%{opacity:1}40.9836%{opacity:0}100%{opacity:0}}
-.q25{opacity:0;animation:q25 36600s linear -20034s infinite}
+.q25{opacity:0;animation:q25 36600s linear -20105s infinite}
 @keyframes q25{0%{opacity:0}40.9836%{opacity:0}40.9876%{opacity:1}42.6190%{opacity:1}42.6230%{opacity:0}100%{opacity:0}}
-.q26{opacity:0;animation:q26 36600s linear -20034s infinite}
+.q26{opacity:0;animation:q26 36600s linear -20105s infinite}
 @keyframes q26{0%{opacity:0}42.6230%{opacity:0}42.6270%{opacity:1}44.2583%{opacity:1}44.2623%{opacity:0}100%{opacity:0}}
-.q27{opacity:0;animation:q27 36600s linear -20034s infinite}
+.q27{opacity:0;animation:q27 36600s linear -20105s infinite}
 @keyframes q27{0%{opacity:0}44.2623%{opacity:0}44.2663%{opacity:1}45.8976%{opacity:1}45.9016%{opacity:0}100%{opacity:0}}
-.q28{opacity:0;animation:q28 36600s linear -20034s infinite}
+.q28{opacity:0;animation:q28 36600s linear -20105s infinite}
 @keyframes q28{0%{opacity:0}45.9016%{opacity:0}45.9056%{opacity:1}47.5370%{opacity:1}47.5410%{opacity:0}100%{opacity:0}}
-.q29{opacity:0;animation:q29 36600s linear -20034s infinite}
+.q29{opacity:0;animation:q29 36600s linear -20105s infinite}
 @keyframes q29{0%{opacity:0}47.5410%{opacity:0}47.5450%{opacity:1}49.1763%{opacity:1}49.1803%{opacity:0}100%{opacity:0}}
-.q30{opacity:0;animation:q30 36600s linear -20034s infinite}
+.q30{opacity:0;animation:q30 36600s linear -20105s infinite}
 @keyframes q30{0%{opacity:0}49.1803%{opacity:0}49.1843%{opacity:1}50.8157%{opacity:1}50.8197%{opacity:0}100%{opacity:0}}
-.q31{opacity:0;animation:q31 36600s linear -20034s infinite}
+.q31{opacity:0;animation:q31 36600s linear -20105s infinite}
 @keyframes q31{0%{opacity:0}50.8197%{opacity:0}50.8237%{opacity:1}52.4550%{opacity:1}52.4590%{opacity:0}100%{opacity:0}}
-.q32{opacity:0;animation:q32 36600s linear -20034s infinite}
+.q32{opacity:0;animation:q32 36600s linear -20105s infinite}
 @keyframes q32{0%{opacity:0}52.4590%{opacity:0}52.4630%{opacity:1}54.0944%{opacity:1}54.0984%{opacity:0}100%{opacity:0}}
-.q33{opacity:0;animation:q33 36600s linear -20034s infinite}
+.q33{opacity:0;animation:q33 36600s linear -20105s infinite}
 @keyframes q33{0%{opacity:0}54.0984%{opacity:0}54.1024%{opacity:1}55.7337%{opacity:1}55.7377%{opacity:0}100%{opacity:0}}
-.q34{opacity:0;animation:q34 36600s linear -20034s infinite}
+.q34{opacity:0;animation:q34 36600s linear -20105s infinite}
 @keyframes q34{0%{opacity:0}55.7377%{opacity:0}55.7417%{opacity:1}57.3730%{opacity:1}57.3770%{opacity:0}100%{opacity:0}}
-.q35{opacity:0;animation:q35 36600s linear -20034s infinite}
+.q35{opacity:0;animation:q35 36600s linear -20105s infinite}
 @keyframes q35{0%{opacity:0}57.3770%{opacity:0}57.3810%{opacity:1}59.0124%{opacity:1}59.0164%{opacity:0}100%{opacity:0}}
-.q36{opacity:0;animation:q36 36600s linear -20034s infinite}
+.q36{opacity:0;animation:q36 36600s linear -20105s infinite}
 @keyframes q36{0%{opacity:0}59.0164%{opacity:0}59.0204%{opacity:1}60.6517%{opacity:1}60.6557%{opacity:0}100%{opacity:0}}
-.q37{opacity:0;animation:q37 36600s linear -20034s infinite}
+.q37{opacity:0;animation:q37 36600s linear -20105s infinite}
 @keyframes q37{0%{opacity:0}60.6557%{opacity:0}60.6597%{opacity:1}62.2911%{opacity:1}62.2951%{opacity:0}100%{opacity:0}}
-.q38{opacity:0;animation:q38 36600s linear -20034s infinite}
+.q38{opacity:0;animation:q38 36600s linear -20105s infinite}
 @keyframes q38{0%{opacity:0}62.2951%{opacity:0}62.2991%{opacity:1}63.9304%{opacity:1}63.9344%{opacity:0}100%{opacity:0}}
-.q39{opacity:0;animation:q39 36600s linear -20034s infinite}
+.q39{opacity:0;animation:q39 36600s linear -20105s infinite}
 @keyframes q39{0%{opacity:0}63.9344%{opacity:0}63.9384%{opacity:1}65.5698%{opacity:1}65.5738%{opacity:0}100%{opacity:0}}
-.q40{opacity:0;animation:q40 36600s linear -20034s infinite}
+.q40{opacity:0;animation:q40 36600s linear -20105s infinite}
 @keyframes q40{0%{opacity:0}65.5738%{opacity:0}65.5778%{opacity:1}67.2091%{opacity:1}67.2131%{opacity:0}100%{opacity:0}}
-.q41{opacity:0;animation:q41 36600s linear -20034s infinite}
+.q41{opacity:0;animation:q41 36600s linear -20105s infinite}
 @keyframes q41{0%{opacity:0}67.2131%{opacity:0}67.2171%{opacity:1}68.8485%{opacity:1}68.8525%{opacity:0}100%{opacity:0}}
-.q42{opacity:0;animation:q42 36600s linear -20034s infinite}
+.q42{opacity:0;animation:q42 36600s linear -20105s infinite}
 @keyframes q42{0%{opacity:0}68.8525%{opacity:0}68.8565%{opacity:1}70.4878%{opacity:1}70.4918%{opacity:0}100%{opacity:0}}
-.q43{opacity:0;animation:q43 36600s linear -20034s infinite}
+.q43{opacity:0;animation:q43 36600s linear -20105s infinite}
 @keyframes q43{0%{opacity:0}70.4918%{opacity:0}70.4958%{opacity:1}72.1271%{opacity:1}72.1311%{opacity:0}100%{opacity:0}}
-.q44{opacity:0;animation:q44 36600s linear -20034s infinite}
+.q44{opacity:0;animation:q44 36600s linear -20105s infinite}
 @keyframes q44{0%{opacity:0}72.1311%{opacity:0}72.1351%{opacity:1}73.7665%{opacity:1}73.7705%{opacity:0}100%{opacity:0}}
-.q45{opacity:0;animation:q45 36600s linear -20034s infinite}
+.q45{opacity:0;animation:q45 36600s linear -20105s infinite}
 @keyframes q45{0%{opacity:0}73.7705%{opacity:0}73.7745%{opacity:1}75.4058%{opacity:1}75.4098%{opacity:0}100%{opacity:0}}
-.q46{opacity:0;animation:q46 36600s linear -20034s infinite}
+.q46{opacity:0;animation:q46 36600s linear -20105s infinite}
 @keyframes q46{0%{opacity:0}75.4098%{opacity:0}75.4138%{opacity:1}77.0452%{opacity:1}77.0492%{opacity:0}100%{opacity:0}}
-.q47{opacity:0;animation:q47 36600s linear -20034s infinite}
+.q47{opacity:0;animation:q47 36600s linear -20105s infinite}
 @keyframes q47{0%{opacity:0}77.0492%{opacity:0}77.0532%{opacity:1}78.6845%{opacity:1}78.6885%{opacity:0}100%{opacity:0}}
-.q48{opacity:0;animation:q48 36600s linear -20034s infinite}
+.q48{opacity:0;animation:q48 36600s linear -20105s infinite}
 @keyframes q48{0%{opacity:0}78.6885%{opacity:0}78.6925%{opacity:1}80.3239%{opacity:1}80.3279%{opacity:0}100%{opacity:0}}
-.q49{opacity:0;animation:q49 36600s linear -20034s infinite}
+.q49{opacity:0;animation:q49 36600s linear -20105s infinite}
 @keyframes q49{0%{opacity:0}80.3279%{opacity:0}80.3319%{opacity:1}81.9632%{opacity:1}81.9672%{opacity:0}100%{opacity:0}}
-.q50{opacity:0;animation:q50 36600s linear -20034s infinite}
+.q50{opacity:0;animation:q50 36600s linear -20105s infinite}
 @keyframes q50{0%{opacity:0}81.9672%{opacity:0}81.9712%{opacity:1}83.6026%{opacity:1}83.6066%{opacity:0}100%{opacity:0}}
-.q51{opacity:0;animation:q51 36600s linear -20034s infinite}
+.q51{opacity:0;animation:q51 36600s linear -20105s infinite}
 @keyframes q51{0%{opacity:0}83.6066%{opacity:0}83.6106%{opacity:1}85.2419%{opacity:1}85.2459%{opacity:0}100%{opacity:0}}
-.q52{opacity:0;animation:q52 36600s linear -20034s infinite}
+.q52{opacity:0;animation:q52 36600s linear -20105s infinite}
 @keyframes q52{0%{opacity:0}85.2459%{opacity:0}85.2499%{opacity:1}86.8812%{opacity:1}86.8852%{opacity:0}100%{opacity:0}}
-.q53{opacity:0;animation:q53 36600s linear -20034s infinite}
+.q53{opacity:0;animation:q53 36600s linear -20105s infinite}
 @keyframes q53{0%{opacity:0}86.8852%{opacity:0}86.8892%{opacity:1}88.5206%{opacity:1}88.5246%{opacity:0}100%{opacity:0}}
-.q54{opacity:0;animation:q54 36600s linear -20034s infinite}
+.q54{opacity:0;animation:q54 36600s linear -20105s infinite}
 @keyframes q54{0%{opacity:0}88.5246%{opacity:0}88.5286%{opacity:1}90.1599%{opacity:1}90.1639%{opacity:0}100%{opacity:0}}
-.q55{opacity:0;animation:q55 36600s linear -20034s infinite}
+.q55{opacity:0;animation:q55 36600s linear -20105s infinite}
 @keyframes q55{0%{opacity:0}90.1639%{opacity:0}90.1679%{opacity:1}91.7993%{opacity:1}91.8033%{opacity:0}100%{opacity:0}}
-.q56{opacity:0;animation:q56 36600s linear -20034s infinite}
+.q56{opacity:0;animation:q56 36600s linear -20105s infinite}
 @keyframes q56{0%{opacity:0}91.8033%{opacity:0}91.8073%{opacity:1}93.4386%{opacity:1}93.4426%{opacity:0}100%{opacity:0}}
-.q57{opacity:0;animation:q57 36600s linear -20034s infinite}
+.q57{opacity:0;animation:q57 36600s linear -20105s infinite}
 @keyframes q57{0%{opacity:0}93.4426%{opacity:0}93.4466%{opacity:1}95.0780%{opacity:1}95.0820%{opacity:0}100%{opacity:0}}
-.q58{opacity:0;animation:q58 36600s linear -20034s infinite}
+.q58{opacity:0;animation:q58 36600s linear -20105s infinite}
 @keyframes q58{0%{opacity:0}95.0820%{opacity:0}95.0860%{opacity:1}96.7173%{opacity:1}96.7213%{opacity:0}100%{opacity:0}}
-.q59{opacity:0;animation:q59 36600s linear -20034s infinite}
+.q59{opacity:0;animation:q59 36600s linear -20105s infinite}
 @keyframes q59{0%{opacity:0}96.7213%{opacity:0}96.7253%{opacity:1}98.3567%{opacity:1}98.3607%{opacity:0}100%{opacity:0}}
-.q60{opacity:0;animation:q60 36600s linear -20034s infinite}
+.q60{opacity:0;animation:q60 36600s linear -20105s infinite}
 @keyframes q60{0%{opacity:0}98.3607%{opacity:0}98.3647%{opacity:1}99.9960%{opacity:1}100.0000%{opacity:0}100%{opacity:0}}</style><rect x="0.5" y="0.5" width="839" height="149" rx="10" fill="#0D1117" stroke="#30363D"/><rect x="1" y="12" width="3" height="126" rx="1.5" fill="#F74C00" opacity="0.9"/><text x="30" y="82" font-size="72" font-weight="700" fill="#F74C00" opacity="0.85" font-family="Georgia,serif">&#8220;</text><g class="q0"><text x="95" y="52" class="qtext">The impediment to action advances action. What stands in the way becomes</text><text x="95" y="78" class="qtext">the way.</text><text x="810" y="118" text-anchor="end" class="author">— Marcus Aurelius</text></g><g class="q1"><text x="95" y="62" class="qtext">Anyone who has never made a mistake has never tried anything new.</text><text x="810" y="102" text-anchor="end" class="author">— Albert Einstein</text></g><g class="q2"><text x="95" y="62" class="qtext">The secret of getting ahead is getting started.</text><text x="810" y="102" text-anchor="end" class="author">— Mark Twain</text></g><g class="q3"><text x="95" y="52" class="qtext">Life is like riding a bicycle. To keep your balance, you must keep</text><text x="95" y="78" class="qtext">moving.</text><text x="810" y="118" text-anchor="end" class="author">— Albert Einstein</text></g><g class="q4"><text x="95" y="62" class="qtext">Not all those who wander are lost.</text><text x="810" y="102" text-anchor="end" class="author">— J.R.R. Tolkien</text></g><g class="q5"><text x="95" y="52" class="qtext">Try not to become a man of success, but rather try to become a man of</text><text x="95" y="78" class="qtext">value.</text><text x="810" y="118" text-anchor="end" class="author">— Albert Einstein</text></g><g class="q6"><text x="95" y="52" class="qtext">In three words I can sum up everything I've learned about life: it goes</text><text x="95" y="78" class="qtext">on.</text><text x="810" y="118" text-anchor="end" class="author">— Robert Frost</text></g><g class="q7"><text x="95" y="62" class="qtext">No one can make you feel inferior without your consent.</text><text x="810" y="102" text-anchor="end" class="author">— Eleanor Roosevelt</text></g><g class="q8"><text x="95" y="62" class="qtext">Tell me, what is it you plan to do with your one wild and precious life?</text><text x="810" y="102" text-anchor="end" class="author">— Mary Oliver</text></g><g class="q9"><text x="95" y="62" class="qtext">The future belongs to those who believe in the beauty of their dreams.</text><text x="810" y="102" text-anchor="end" class="author">— Eleanor Roosevelt</text></g><g class="q10"><text x="95" y="62" class="qtext">How we spend our days is, of course, how we spend our lives.</text><text x="810" y="102" text-anchor="end" class="author">— Annie Dillard</text></g><g class="q11"><text x="95" y="62" class="qtext">Genius is one percent inspiration and ninety-nine percent perspiration.</text><text x="810" y="102" text-anchor="end" class="author">— Thomas Edison</text></g><g class="q12"><text x="95" y="62" class="qtext">Inspiration exists, but it has to find you working.</text><text x="810" y="102" text-anchor="end" class="author">— Pablo Picasso</text></g><g class="q13"><text x="95" y="62" class="qtext">I have not failed. I've just found 10,000 ways that won't work.</text><text x="810" y="102" text-anchor="end" class="author">— Thomas Edison</text></g><g class="q14"><text x="95" y="52" class="qtext">Yesterday I was clever, so I wanted to change the world. Today I am</text><text x="95" y="78" class="qtext">wise, so I am changing myself.</text><text x="810" y="118" text-anchor="end" class="author">— Rumi</text></g><g class="q15"><text x="95" y="52" class="qtext">The best way to find yourself is to lose yourself in the service of</text><text x="95" y="78" class="qtext">others.</text><text x="810" y="118" text-anchor="end" class="author">— Mahatma Gandhi</text></g><g class="q16"><text x="95" y="62" class="qtext">The wound is the place where the Light enters you.</text><text x="810" y="102" text-anchor="end" class="author">— Rumi</text></g><g class="q17"><text x="95" y="62" class="qtext">The only true wisdom is in knowing you know nothing.</text><text x="810" y="102" text-anchor="end" class="author">— Socrates</text></g><g class="q18"><text x="95" y="62" class="qtext">The quieter you become, the more you are able to hear.</text><text x="810" y="102" text-anchor="end" class="author">— Rumi</text></g><g class="q19"><text x="95" y="62" class="qtext">An unexamined life is not worth living.</text><text x="810" y="102" text-anchor="end" class="author">— Socrates</text></g><g class="q20"><text x="95" y="62" class="qtext">Nature does not hurry, yet everything is accomplished.</text><text x="810" y="102" text-anchor="end" class="author">— Lao Tzu</text></g><g class="q21"><text x="95" y="62" class="qtext">Life is what happens when you're busy making other plans.</text><text x="810" y="102" text-anchor="end" class="author">— John Lennon</text></g><g class="q22"><text x="95" y="62" class="qtext">A journey of a thousand miles begins with a single step.</text><text x="810" y="102" text-anchor="end" class="author">— Lao Tzu</text></g><g class="q23"><text x="95" y="62" class="qtext">Stay hungry, stay foolish.</text><text x="810" y="102" text-anchor="end" class="author">— Steve Jobs</text></g><g class="q24"><text x="95" y="62" class="qtext">If you want to go quickly, go alone. If you want to go far, go together.</text><text x="810" y="102" text-anchor="end" class="author">— African Proverb</text></g><g class="q25"><text x="95" y="52" class="qtext">You can't connect the dots looking forward; you can only connect them</text><text x="95" y="78" class="qtext">looking backwards.</text><text x="810" y="118" text-anchor="end" class="author">— Steve Jobs</text></g><g class="q26"><text x="95" y="52" class="qtext">Darkness cannot drive out darkness; only light can do that. Hate cannot</text><text x="95" y="78" class="qtext">drive out hate; only love can do that.</text><text x="810" y="118" text-anchor="end" class="author">— Martin Luther King Jr.</text></g><g class="q27"><text x="95" y="62" class="qtext">Your time is limited, so don't waste it living someone else's life.</text><text x="810" y="102" text-anchor="end" class="author">— Steve Jobs</text></g><g class="q28"><text x="95" y="62" class="qtext">The time is always right to do what is right.</text><text x="810" y="102" text-anchor="end" class="author">— Martin Luther King Jr.</text></g><g class="q29"><text x="95" y="62" class="qtext">The only way to do great work is to love what you do.</text><text x="810" y="102" text-anchor="end" class="author">— Steve Jobs</text></g><g class="q30"><text x="95" y="52" class="qtext">Do the best you can until you know better. Then when you know better, do</text><text x="95" y="78" class="qtext">better.</text><text x="810" y="118" text-anchor="end" class="author">— Maya Angelou</text></g><g class="q31"><text x="95" y="62" class="qtext">Discipline equals freedom.</text><text x="810" y="102" text-anchor="end" class="author">— Jocko Willink</text></g><g class="q32"><text x="95" y="62" class="qtext">Plans are worthless, but planning is everything.</text><text x="810" y="102" text-anchor="end" class="author">— Dwight D. Eisenhower</text></g><g class="q33"><text x="95" y="62" class="qtext">Small daily improvements are the key to staggering long-term results.</text><text x="810" y="102" text-anchor="end" class="author">— Robin Sharma</text></g><g class="q34"><text x="95" y="52" class="qtext">A good plan violently executed now is better than a perfect plan</text><text x="95" y="78" class="qtext">executed next week.</text><text x="810" y="118" text-anchor="end" class="author">— George S. Patton</text></g><g class="q35"><text x="95" y="62" class="qtext">Hard choices, easy life. Easy choices, hard life.</text><text x="810" y="102" text-anchor="end" class="author">— Jerzy Gregorek</text></g><g class="q36"><text x="95" y="62" class="qtext">You miss 100% of the shots you don't take.</text><text x="810" y="102" text-anchor="end" class="author">— Wayne Gretzky</text></g><g class="q37"><text x="95" y="62" class="qtext">Your future is created by what you do today, not tomorrow.</text><text x="810" y="102" text-anchor="end" class="author">— Robert Kiyosaki</text></g><g class="q38"><text x="95" y="62" class="qtext">Talent wins games, but teamwork and intelligence win championships.</text><text x="810" y="102" text-anchor="end" class="author">— Michael Jordan</text></g><g class="q39"><text x="95" y="62" class="qtext">The man who moves a mountain begins by carrying away small stones.</text><text x="810" y="102" text-anchor="end" class="author">— Confucius</text></g><g class="q40"><text x="95" y="52" class="qtext">I've failed over and over and over again in my life. And that is why I</text><text x="95" y="78" class="qtext">succeed.</text><text x="810" y="118" text-anchor="end" class="author">— Michael Jordan</text></g><g class="q41"><text x="95" y="62" class="qtext">Everything you've ever wanted is on the other side of fear.</text><text x="810" y="102" text-anchor="end" class="author">— George Addair</text></g><g class="q42"><text x="95" y="62" class="qtext">Talk is cheap. Show me the code.</text><text x="810" y="102" text-anchor="end" class="author">— Linus Torvalds</text></g><g class="q43"><text x="95" y="62" class="qtext">Knowing is not enough; we must apply. Willing is not enough; we must do.</text><text x="810" y="102" text-anchor="end" class="author">— Bruce Lee</text></g><g class="q44"><text x="95" y="52" class="qtext">Programs must be written for people to read, and only incidentally for</text><text x="95" y="78" class="qtext">machines to execute.</text><text x="810" y="118" text-anchor="end" class="author">— Harold Abelson</text></g><g class="q45"><text x="95" y="62" class="qtext">The cave you fear to enter holds the treasure you seek.</text><text x="810" y="102" text-anchor="end" class="author">— Joseph Campbell</text></g><g class="q46"><text x="95" y="62" class="qtext">Premature optimization is the root of all evil.</text><text x="810" y="102" text-anchor="end" class="author">— Donald Knuth</text></g><g class="q47"><text x="95" y="62" class="qtext">He who has a why to live can bear almost any how.</text><text x="810" y="102" text-anchor="end" class="author">— Friedrich Nietzsche</text></g><g class="q48"><text x="95" y="62" class="qtext">The details are not the details. They make the design.</text><text x="810" y="102" text-anchor="end" class="author">— Charles Eames</text></g><g class="q49"><text x="95" y="62" class="qtext">A ship in harbor is safe, but that is not what ships are built for.</text><text x="810" y="102" text-anchor="end" class="author">— John A. Shedd</text></g><g class="q50"><text x="95" y="52" class="qtext">Perfection is attained not when there is nothing more to add, but when</text><text x="95" y="78" class="qtext">there is nothing more to remove.</text><text x="810" y="118" text-anchor="end" class="author">— Antoine de Saint-Exupéry</text></g><g class="q51"><text x="95" y="52" class="qtext">You do not rise to the level of your goals. You fall to the level of</text><text x="95" y="78" class="qtext">your systems.</text><text x="810" y="118" text-anchor="end" class="author">— James Clear</text></g><g class="q52"><text x="95" y="52" class="qtext">Success is a lousy teacher. It seduces smart people into thinking they</text><text x="95" y="78" class="qtext">can't lose.</text><text x="810" y="118" text-anchor="end" class="author">— Bill Gates</text></g><g class="q53"><text x="95" y="62" class="qtext">It always seems impossible until it's done.</text><text x="810" y="102" text-anchor="end" class="author">— Nelson Mandela</text></g><g class="q54"><text x="95" y="62" class="qtext">Simple things should be simple, complex things should be possible.</text><text x="810" y="102" text-anchor="end" class="author">— Alan Kay</text></g><g class="q55"><text x="95" y="52" class="qtext">The best time to plant a tree was 20 years ago. The second best time is</text><text x="95" y="78" class="qtext">now.</text><text x="810" y="118" text-anchor="end" class="author">— Chinese Proverb</text></g><g class="q56"><text x="95" y="62" class="qtext">The best way to predict the future is to invent it.</text><text x="810" y="102" text-anchor="end" class="author">— Alan Kay</text></g><g class="q57"><text x="95" y="62" class="qtext">Fall seven times, stand up eight.</text><text x="810" y="102" text-anchor="end" class="author">— Japanese Proverb</text></g><g class="q58"><text x="95" y="62" class="qtext">If I have seen further, it is by standing on the shoulders of giants.</text><text x="810" y="102" text-anchor="end" class="author">— Isaac Newton</text></g><g class="q59"><text x="95" y="62" class="qtext">We suffer more often in imagination than in reality.</text><text x="810" y="102" text-anchor="end" class="author">— Seneca</text></g><g class="q60"><text x="95" y="62" class="qtext">In the middle of difficulty lies opportunity.</text><text x="810" y="102" text-anchor="end" class="author">— Albert Einstein</text></g></svg>

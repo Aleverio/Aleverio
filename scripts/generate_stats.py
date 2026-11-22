@@ -7,9 +7,11 @@ Run locally or via GitHub Actions (every 6h). No third-party services.
 import glob
 import json
 import os
+import sys
 import textwrap
 import urllib.request
 from datetime import datetime, timedelta, timezone
+from math import gcd
 
 USER = "Aleverio"
 API = "https://api.github.com"
@@ -406,7 +408,10 @@ def langs_card(repos):
     )
 
 
+QUOTE_INTERVAL = 600  # seconds — one fresh quote every 10 minutes
+
 QUOTES = [
+    # --- original 16 -----------------------------------------------------
     ("The impediment to action advances action. What stands in the way becomes the way.", "Marcus Aurelius"),
     ("We suffer more often in imagination than in reality.", "Seneca"),
     ("Fall seven times, stand up eight.", "Japanese Proverb"),
@@ -423,34 +428,119 @@ QUOTES = [
     ("Hard choices, easy life. Easy choices, hard life.", "Jerzy Gregorek"),
     ("Small daily improvements are the key to staggering long-term results.", "Robin Sharma"),
     ("Discipline equals freedom.", "Jocko Willink"),
+    # --- 45 more: people who actually lived it ---------------------------
+    ("The only way to do great work is to love what you do.", "Steve Jobs"),
+    ("Your time is limited, so don't waste it living someone else's life.", "Steve Jobs"),
+    ("You can't connect the dots looking forward; you can only connect them looking backwards.", "Steve Jobs"),
+    ("Stay hungry, stay foolish.", "Steve Jobs"),
+    ("Life is what happens when you're busy making other plans.", "John Lennon"),
+    ("An unexamined life is not worth living.", "Socrates"),
+    ("The only true wisdom is in knowing you know nothing.", "Socrates"),
+    ("The best way to find yourself is to lose yourself in the service of others.", "Mahatma Gandhi"),
+    ("I have not failed. I've just found 10,000 ways that won't work.", "Thomas Edison"),
+    ("Genius is one percent inspiration and ninety-nine percent perspiration.", "Thomas Edison"),
+    ("The future belongs to those who believe in the beauty of their dreams.", "Eleanor Roosevelt"),
+    ("No one can make you feel inferior without your consent.", "Eleanor Roosevelt"),
+    ("Try not to become a man of success, but rather try to become a man of value.", "Albert Einstein"),
+    ("Life is like riding a bicycle. To keep your balance, you must keep moving.", "Albert Einstein"),
+    ("Anyone who has never made a mistake has never tried anything new.", "Albert Einstein"),
+    ("In the middle of difficulty lies opportunity.", "Albert Einstein"),
+    ("If I have seen further, it is by standing on the shoulders of giants.", "Isaac Newton"),
+    ("The best way to predict the future is to invent it.", "Alan Kay"),
+    ("Simple things should be simple, complex things should be possible.", "Alan Kay"),
+    ("Success is a lousy teacher. It seduces smart people into thinking they can't lose.", "Bill Gates"),
+    ("Perfection is attained not when there is nothing more to add, but when there is nothing more to remove.", "Antoine de Saint-Exupéry"),
+    ("The details are not the details. They make the design.", "Charles Eames"),
+    ("Premature optimization is the root of all evil.", "Donald Knuth"),
+    ("Programs must be written for people to read, and only incidentally for machines to execute.", "Harold Abelson"),
+    ("Talk is cheap. Show me the code.", "Linus Torvalds"),
+    ("I've failed over and over and over again in my life. And that is why I succeed.", "Michael Jordan"),
+    ("Talent wins games, but teamwork and intelligence win championships.", "Michael Jordan"),
+    ("You miss 100% of the shots you don't take.", "Wayne Gretzky"),
+    ("A good plan violently executed now is better than a perfect plan executed next week.", "George S. Patton"),
+    ("Plans are worthless, but planning is everything.", "Dwight D. Eisenhower"),
+    ("Do the best you can until you know better. Then when you know better, do better.", "Maya Angelou"),
+    ("The time is always right to do what is right.", "Martin Luther King Jr."),
+    ("Darkness cannot drive out darkness; only light can do that. Hate cannot drive out hate; only love can do that.", "Martin Luther King Jr."),
+    ("If you want to go quickly, go alone. If you want to go far, go together.", "African Proverb"),
+    ("A journey of a thousand miles begins with a single step.", "Lao Tzu"),
+    ("Nature does not hurry, yet everything is accomplished.", "Lao Tzu"),
+    ("The quieter you become, the more you are able to hear.", "Rumi"),
+    ("The wound is the place where the Light enters you.", "Rumi"),
+    ("Yesterday I was clever, so I wanted to change the world. Today I am wise, so I am changing myself.", "Rumi"),
+    ("Inspiration exists, but it has to find you working.", "Pablo Picasso"),
+    ("How we spend our days is, of course, how we spend our lives.", "Annie Dillard"),
+    ("Tell me, what is it you plan to do with your one wild and precious life?", "Mary Oliver"),
+    ("In three words I can sum up everything I've learned about life: it goes on.", "Robert Frost"),
+    ("Not all those who wander are lost.", "J.R.R. Tolkien"),
+    ("The secret of getting ahead is getting started.", "Mark Twain"),
 ]
 
 
 def quote_card():
-    day = datetime.now(timezone.utc).timetuple().tm_yday
-    text, author = QUOTES[day % len(QUOTES)]
-    lines = textwrap.wrap(text, width=72)[:3]
+    """Render a self-contained SVG that rotates every quote every 10 minutes.
+
+    The rotation lives *inside* the SVG as CSS animations, so it keeps ticking
+    in the viewer's browser even if GitHub Actions is late or the raw image is
+    cached. Negative animation delays are seeded from the current UTC clock so
+    every visitor lands on the same wall-clock quote.
+    """
+    n = len(QUOTES)
+    period = n * QUOTE_INTERVAL
+    now_s = int(datetime.now(timezone.utc).timestamp())
+    elapsed = now_s % QUOTE_INTERVAL
+    delay = now_s % period
+    step = 100.0 / n
+    # Coprime stride => every quote gets its turn before the cycle repeats.
+    stride = n // 2
+    while gcd(stride, n) != 1:
+        stride -= 1
+
+    css = [
+        ".qtext{font-size:18px;font-style:italic;fill:#E6EDF3}",
+        ".author{font-size:14px;font-weight:700;fill:#FFB454}",
+        ".note{font-size:10px;fill:#7D8590}",
+        ".live{font-size:9px;font-weight:700;fill:#3FB950;letter-spacing:1px}",
+        "@keyframes tick{from{stroke-dashoffset:715}to{stroke-dashoffset:0}}",
+        f".tick{{animation:tick {QUOTE_INTERVAL}s linear infinite -{elapsed}s}}",
+    ]
+    groups = []
+    for slot in range(n):
+        text, author = QUOTES[(slot * stride) % n]
+        wrapped = textwrap.wrap(text, width=72)
+        lines = wrapped[:3]
+        if len(wrapped) > 3:
+            lines[2] = lines[2][:69].rstrip() + "..."
+        y0 = 62 if len(lines) == 1 else (52 if len(lines) == 2 else 42)
+        s, e = slot * step, (slot + 1) * step
+        css.append(f".q{slot}{{opacity:0;animation:q{slot} {period}s linear -{delay}s infinite}}")
+        css.append(
+            f"@keyframes q{slot}{{0%{{opacity:0}}"
+            f"{s:.4f}%{{opacity:0}}"
+            f"{s + 0.004:.4f}%{{opacity:1}}"
+            f"{e - 0.004:.4f}%{{opacity:1}}"
+            f"{e:.4f}%{{opacity:0}}"
+            f"100%{{opacity:0}}}}"
+        )
+        g = f'<g class="q{slot}">'
+        for i, line in enumerate(lines):
+            g += f'<text x="95" y="{y0 + i * 26}" class="qtext">{esc(line)}</text>'
+        g += f'<text x="810" y="{y0 + len(lines) * 26 + 14}" text-anchor="end" class="author">— {esc(author)}</text></g>'
+        groups.append(g)
+
     body = (
         '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="170" viewBox="0 0 840 170" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
-        "<style>"
-        ".q{font-size:18px;font-style:italic;fill:#E6EDF3}"
-        ".a{font-size:14px;font-weight:700;fill:#FFB454}"
-        ".n{font-size:10px;fill:#7D8590}"
-        ".fade{animation:fade 1.2s ease both}"
-        "@keyframes fade{from{opacity:0}to{opacity:1}}"
-        "</style>"
+        "<style>" + "\n".join(css) + "</style>"
         '<rect x="0.5" y="0.5" width="839" height="169" rx="10" fill="#0D1117" stroke="#30363D"/>'
         '<rect x="1" y="12" width="3" height="146" rx="1.5" fill="#F74C00" opacity="0.9"/>'
         '<text x="30" y="88" font-size="72" font-weight="700" fill="#F74C00" opacity="0.85" font-family="Georgia,serif">&#8220;</text>'
-        '<g class="fade">'
-    )
-    y0 = 62 if len(lines) == 1 else (52 if len(lines) == 2 else 42)
-    for i, line in enumerate(lines):
-        body += f'<text x="95" y="{y0 + i * 26}" class="q">{esc(line)}</text>'
-    body += (
-        f'<text x="810" y="{y0 + len(lines) * 26 + 14}" text-anchor="end" class="a">— {esc(author)}</text>'
-        '</g>'
-        '<text x="95" y="152" class="n">daily fuel · a new quote every day, delivered by the live pipeline</text>'
+        '<circle cx="756" cy="22" r="3" fill="#3FB950">'
+        '<animate attributeName="opacity" values="1;0.25;1" dur="2s" repeatCount="indefinite"/></circle>'
+        '<text x="764" y="26" class="live">LIVE</text>'
+        + "".join(groups)
+        + f'<text x="95" y="150" class="note">a new quote every 10 minutes · {n} voices · delivered by the live pipeline</text>'
+        '<rect x="95" y="157" width="715" height="2" rx="1" fill="#21262D"/>'
+        '<line class="tick" x1="95" y1="158" x2="810" y2="158" stroke="#F74C00" stroke-width="2" stroke-dasharray="715" stroke-dashoffset="715"/>'
         "</svg>"
     )
     return body
@@ -564,6 +654,13 @@ def sync_readme(table):
 
 
 def main():
+    if "--quote-only" in sys.argv:
+        os.makedirs(OUT, exist_ok=True)
+        path = os.path.join(OUT, "quote.svg")
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(quote_card())
+        print("wrote", os.path.normpath(path))
+        return
     user = get(f"/users/{USER}")
     repos = get(f"/users/{USER}/repos?per_page=100&type=owner")
     os.makedirs(OUT, exist_ok=True)

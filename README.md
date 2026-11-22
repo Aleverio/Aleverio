@@ -54,8 +54,8 @@ $ cargo run --release --bin alkeyy
 
 <div align="center">
 
-<!-- Kata-kata pengubah hidup — berganti otomatis setiap hari via Actions -->
-<img src="./assets/quote.svg" width="100%" alt="Daily fuel — life-changing quote, rotates every day" />
+<!-- Kata-kata pengubah hidup — 61 voices, berganti sendiri tiap 10 menit (langsung di dalam SVG) -->
+<img src="./assets/quote.svg" width="100%" alt="Daily fuel — life-changing quote, rotates every 10 minutes" />
 
 </div>
 

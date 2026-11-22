@@ -178,23 +178,19 @@ def heatmap_card(days_fallback, total_fallback):
     x0 = 34
     y0 = 64
     body = (
-        '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="214" viewBox="0 0 840 214" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
+        '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="204" viewBox="0 0 840 204" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
         "<style>"
         ".ht{font-size:15px;font-weight:700;fill:#F74C00}"
         ".hm{font-size:10px;fill:#7D8590}"
         ".hn{font-size:10px;fill:#7D8590}"
         ".hb{font-size:22px;font-weight:700;fill:#FFB454;font-family:'JetBrains Mono',Consolas,monospace}"
-        ".live{font-size:10px;font-weight:700;fill:#3FB950;letter-spacing:1px}"
         "</style>"
-        '<rect x="0.5" y="0.5" width="839" height="213" rx="10" fill="#0D1117" stroke="#30363D"/>'
+        '<rect x="0.5" y="0.5" width="839" height="203" rx="10" fill="#0D1117" stroke="#30363D"/>'
         '<rect x="1" y="1" width="838" height="3" rx="1.5" fill="#F74C00" opacity="0.85"/>'
     )
     label = (f"{total} contributions in the last year" if nw > 30
              else f"{total} public contributions · last 90 days")
     body += f'<text x="25" y="36" class="ht">{esc(label)}</text>'
-    body += ('<circle cx="772" cy="31" r="4" fill="#3FB950">'
-             '<animate attributeName="opacity" values="1;0.25;1" dur="2s" repeatCount="indefinite"/></circle>'
-             '<text x="782" y="35" class="live">LIVE</text>')
     last_month = ""
     for wi, week in enumerate(weeks):
         x = x0 + wi * (cell + gap)
@@ -235,7 +231,6 @@ def heatmap_card(days_fallback, total_fallback):
     for i in range(6):
         body += f'<rect x="{lx + 30 + i * 15}" y="187" width="11" height="11" rx="2.5" fill="{HEAT[i]}"/>'
     body += f'<text x="{lx + 30 + 6 * 15 + 4}" y="196" class="hn">More</text>'
-    body += '<text x="25" y="196" class="hn">every square is a real contribution · refreshed by the live pipeline</text>'
     body += "</svg>"
     return body
 
@@ -246,7 +241,7 @@ def activity_card(by_repo, commits, prs, creates, repos, private=0):
                     if not r["fork"] and r["created_at"] >= (datetime.now(timezone.utc) - timedelta(days=90)).isoformat()]
     creates = max(creates, len(recent_repos))
     body = (
-        '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="210" viewBox="0 0 840 210" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
+        '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="196" viewBox="0 0 840 196" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
         "<style>"
         ".at{font-size:15px;font-weight:700;fill:#F74C00}"
         ".as{font-size:13px;font-weight:600;fill:#E6EDF3}"
@@ -254,17 +249,13 @@ def activity_card(by_repo, commits, prs, creates, repos, private=0):
         ".ac{font-size:11px;fill:#7D8590}"
         ".ab{font-size:26px;font-weight:700;fill:#FFB454;font-family:'JetBrains Mono',Consolas,monospace}"
         ".al{font-size:11px;fill:#7D8590}"
-        ".live{font-size:10px;font-weight:700;fill:#3FB950;letter-spacing:1px}"
         ".fade{animation:fade .8s ease both}"
         "@keyframes fade{from{opacity:0}to{opacity:1}}"
         "</style>"
-        '<rect x="0.5" y="0.5" width="839" height="209" rx="10" fill="#0D1117" stroke="#30363D"/>'
+        '<rect x="0.5" y="0.5" width="839" height="195" rx="10" fill="#0D1117" stroke="#30363D"/>'
         '<rect x="1" y="1" width="838" height="3" rx="1.5" fill="#F74C00" opacity="0.85"/>'
         '<text x="25" y="36" class="at">Contribution Activity</text>'
         '<text x="200" y="36" class="ac">last 90 days · public events</text>'
-        '<circle cx="772" cy="31" r="4" fill="#3FB950">'
-        '<animate attributeName="opacity" values="1;0.25;1" dur="2s" repeatCount="indefinite"/></circle>'
-        '<text x="782" y="35" class="live">LIVE</text>'
     )
     nrepos = len(by_repo)
     summary = f'Created {commits} commits in {nrepos} repositor{"y" if nrepos == 1 else "ies"}'
@@ -291,7 +282,6 @@ def activity_card(by_repo, commits, prs, creates, repos, private=0):
              '<text x="600" y="118" class="al">repositories created</text>'
              f'<text x="720" y="100" class="ab">{prs}</text>'
              '<text x="720" y="118" class="al">pull requests opened</text>')
-    body += '<text x="25" y="192" class="ac">bars scale with your most active repositories · refreshed every 6h</text>'
     body += "</svg>"
     return body
 
@@ -300,23 +290,12 @@ def esc(s):
     return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def live_dot(x):
-    return (
-        f'<circle cx="{x}" cy="31" r="4" fill="#3FB950">'
-        '<animate attributeName="opacity" values="1;0.25;1" dur="2s" repeatCount="indefinite"/>'
-        "</circle>"
-        f'<text x="{x + 10}" y="35" class="live">LIVE</text>'
-    )
-
-
 def card_open(w, h, title):
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" font-family="'Segoe UI',Ubuntu,Sans-Serif">
 <style>
 .title{{font-size:16px;font-weight:700;fill:#F74C00}}
 .label{{font-size:13px;fill:#E6EDF3}}
 .value{{font-size:13px;font-weight:700;fill:#FFB454;font-family:'JetBrains Mono',Consolas,monospace}}
-.note{{font-size:10px;fill:#7D8590}}
-.live{{font-size:10px;font-weight:700;fill:#3FB950;letter-spacing:1px}}
 .pct{{font-size:12px;fill:#7D8590;font-family:'JetBrains Mono',Consolas,monospace}}
 .fade{{animation:fade .8s ease both}}
 @keyframes fade{{from{{opacity:0}}to{{opacity:1}}}}
@@ -349,12 +328,9 @@ def stats_card(user, repos):
             f'<text x="42" y="{y}" class="label">{esc(label)}</text>'
             f'<text x="395" y="{y}" text-anchor="end" class="value">{esc(val)}</text></g>'
         )
-    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     return (
-        card_open(420, 248, f"{esc(user['name'] or USER)}'s GitHub Stats")
-        + live_dot(352)
+        card_open(420, 216, f"{esc(user['name'] or USER)}'s GitHub Stats")
         + body
-        + f'<text x="25" y="232" class="note">auto-refreshed every 6h via GitHub Actions · {stamp}</text>'
         + "</svg>"
     )
 
@@ -399,11 +375,9 @@ def langs_card(repos):
             f'<text x="{lx + 170}" y="{ly}" text-anchor="end" class="pct">{pct:.1f}%</text></g>'
         )
     return (
-        card_open(420, 248, "Most Used Languages")
-        + live_dot(352)
+        card_open(420, 216, "Most Used Languages")
         + bar
         + legend
-        + '<text x="25" y="232" class="note">weighted by code bytes · own repos only · refreshed every 6h</text>'
         + "</svg>"
     )
 
@@ -488,7 +462,6 @@ def quote_card():
     n = len(QUOTES)
     period = n * QUOTE_INTERVAL
     now_s = int(datetime.now(timezone.utc).timestamp())
-    elapsed = now_s % QUOTE_INTERVAL
     delay = now_s % period
     step = 100.0 / n
     # Coprime stride => every quote gets its turn before the cycle repeats.
@@ -499,10 +472,6 @@ def quote_card():
     css = [
         ".qtext{font-size:18px;font-style:italic;fill:#E6EDF3}",
         ".author{font-size:14px;font-weight:700;fill:#FFB454}",
-        ".note{font-size:10px;fill:#7D8590}",
-        ".live{font-size:9px;font-weight:700;fill:#3FB950;letter-spacing:1px}",
-        "@keyframes tick{from{stroke-dashoffset:715}to{stroke-dashoffset:0}}",
-        f".tick{{animation:tick {QUOTE_INTERVAL}s linear infinite -{elapsed}s}}",
     ]
     groups = []
     for slot in range(n):
@@ -529,19 +498,13 @@ def quote_card():
         groups.append(g)
 
     body = (
-        '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="170" viewBox="0 0 840 170" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
+        '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="150" viewBox="0 0 840 150" font-family="\'Segoe UI\',Ubuntu,Sans-Serif">'
         "<style>" + "\n".join(css) + "</style>"
-        '<rect x="0.5" y="0.5" width="839" height="169" rx="10" fill="#0D1117" stroke="#30363D"/>'
-        '<rect x="1" y="12" width="3" height="146" rx="1.5" fill="#F74C00" opacity="0.9"/>'
-        '<text x="30" y="88" font-size="72" font-weight="700" fill="#F74C00" opacity="0.85" font-family="Georgia,serif">&#8220;</text>'
-        '<circle cx="756" cy="22" r="3" fill="#3FB950">'
-        '<animate attributeName="opacity" values="1;0.25;1" dur="2s" repeatCount="indefinite"/></circle>'
-        '<text x="764" y="26" class="live">LIVE</text>'
+        '<rect x="0.5" y="0.5" width="839" height="149" rx="10" fill="#0D1117" stroke="#30363D"/>'
+        '<rect x="1" y="12" width="3" height="126" rx="1.5" fill="#F74C00" opacity="0.9"/>'
+        '<text x="30" y="82" font-size="72" font-weight="700" fill="#F74C00" opacity="0.85" font-family="Georgia,serif">&#8220;</text>'
         + "".join(groups)
-        + f'<text x="95" y="150" class="note">a new quote every 10 minutes · {n} voices · delivered by the live pipeline</text>'
-        '<rect x="95" y="157" width="715" height="2" rx="1" fill="#21262D"/>'
-        '<line class="tick" x1="95" y1="158" x2="810" y2="158" stroke="#F74C00" stroke-width="2" stroke-dasharray="715" stroke-dashoffset="715"/>'
-        "</svg>"
+        + "</svg>"
     )
     return body
 
@@ -632,9 +595,6 @@ def repos_section(repos):
     for i in range(0, len(cards), 2):
         lines.append(" ".join(cards[i:i + 2]))
         lines.append("")
-    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    lines.append(f"<sub>📡 every public repo, straight from the GitHub API · last sync {stamp}</sub>")
-    lines.append("")
     lines.append("</div>")
     return "\n".join(lines)
 

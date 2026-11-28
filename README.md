@@ -135,7 +135,9 @@ $ cargo build --release --features motivation
 <!-- REPOS:START -->
 <div align="center">
 
-<a href="https://github.com/Aleverio/Brest"><img src="./assets/repo-Brest.svg" width="400" alt="Brest" /></a> <a href="https://github.com/Aleverio/Winct"><img src="./assets/repo-Winct.svg" width="400" alt="Winct" /></a>
+<a href="https://github.com/Aleverio/Arang"><img src="./assets/repo-Arang.svg" width="400" alt="Arang" /></a> <a href="https://github.com/Aleverio/Brest"><img src="./assets/repo-Brest.svg" width="400" alt="Brest" /></a>
+
+<a href="https://github.com/Aleverio/Winct"><img src="./assets/repo-Winct.svg" width="400" alt="Winct" /></a>
 
 </div>
 <!-- REPOS:END -->
